@@ -1,0 +1,4 @@
+library(RNetLogo)
+nl.path <- "D:/Program Files/Netlogo"
+# model.path <- ""
+# setwd(nl.path)

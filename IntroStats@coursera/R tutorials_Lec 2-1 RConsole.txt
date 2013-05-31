@@ -1,0 +1,402 @@
+
+R version 2.15.2 (2012-10-26) -- "Trick or Treat"
+Copyright (C) 2012 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: x86_64-apple-darwin9.8.0/x86_64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[R.app GUI 1.53 (6335) x86_64-apple-darwin9.8.0]
+
+> setwd('~/Desktop/Lec 2-1 quan&categ')
+> lifedata = read.table('LifeExpRegion.txt')
+> colnames(lifedata) = c('Country', 'LifeExp', 'Region')
+> attach(lifedata)
+> lifedata[Region=='EAP', ]
+                 Country LifeExp Region
+8              Australia  81.907    EAP
+24                Brunei  78.005    EAP
+28              Cambodia  63.125    EAP
+36                 China  73.456    EAP
+57                  Fiji  69.245    EAP
+61      French_Polynesia  75.133    EAP
+70                  Guam  76.142    EAP
+77       Hong_Kong_China  82.759    EAP
+81             Indonesia  69.366    EAP
+88                 Japan  83.394    EAP
+92       Korea_Dem._Rep.  68.846    EAP
+93            Korea_Rep.  80.642    EAP
+96                  Laos  67.484    EAP
+104          Macao_China  80.934    EAP
+108             Malaysia  74.221    EAP
+117 Micronesia_Fed._Sts.  68.978    EAP
+119             Mongolia  68.498    EAP
+123              Myanmar  65.193    EAP
+128        New_Caledonia  76.521    EAP
+129          New_Zealand  80.654    EAP
+137     Papua_New_Guinea  62.791    EAP
+140          Philippines  68.749    EAP
+151                Samoa  72.444    EAP
+157            Singapore  81.126    EAP
+160      Solomon_Islands  67.852    EAP
+174             Thailand  74.126    EAP
+175          Timor-Leste  62.475    EAP
+177                Tonga  72.317    EAP
+189              Vanuatu  71.017    EAP
+193              Vietnam  75.181    EAP
+> lifesplit = split(lifedata, Region)
+> lifesplit
+$Amer
+                             Country LifeExp Region
+5                          Argentina  75.901   Amer
+7                              Aruba  75.246   Amer
+11                           Bahamas  75.620   Amer
+14                          Barbados  76.835   Amer
+17                            Belize  76.072   Amer
+20                           Bolivia  66.618   Amer
+23                            Brazil  73.488   Amer
+30                            Canada  81.012   Amer
+35                             Chile  79.120   Amer
+37                          Colombia  73.703   Amer
+41                        Costa_Rica  79.311   Amer
+44                              Cuba  79.143   Amer
+49                    Dominican_Rep.  73.396   Amer
+50                           Ecuador  75.632   Amer
+52                       El_Salvador  72.196   Amer
+60                     French_Guiana  76.456   Amer
+68                           Grenada  75.956   Amer
+69                        Guadeloupe  79.839   Amer
+71                         Guatemala  71.172   Amer
+74                            Guyana  69.927   Amer
+75                             Haiti  62.095   Amer
+76                          Honduras  73.126   Amer
+87                           Jamaica  73.127   Amer
+112                       Martinique  80.499   Amer
+116                           Mexico  76.954   Amer
+127             Netherlands_Antilles  76.652   Amer
+130                        Nicaragua  74.044   Amer
+136                           Panama  76.128   Amer
+138                         Paraguay  72.477   Amer
+139                             Peru  73.990   Amer
+143                      Puerto_Rico  79.158   Amer
+149                      Saint_Lucia  74.641   Amer
+150 Saint_Vincent_and_the_Grenadines  72.283   Amer
+167                         Suriname  70.563   Amer
+178              Trinidad_and_Tobago  70.124   Amer
+186                    United_States  78.531   Amer
+187                          Uruguay  77.005   Amer
+190                        Venezuela  74.402   Amer
+194            Virgin_Islands_(U.S.)  79.407   Amer
+
+$EAP
+                 Country LifeExp Region
+8              Australia  81.907    EAP
+24                Brunei  78.005    EAP
+28              Cambodia  63.125    EAP
+36                 China  73.456    EAP
+57                  Fiji  69.245    EAP
+61      French_Polynesia  75.133    EAP
+70                  Guam  76.142    EAP
+77       Hong_Kong_China  82.759    EAP
+81             Indonesia  69.366    EAP
+88                 Japan  83.394    EAP
+92       Korea_Dem._Rep.  68.846    EAP
+93            Korea_Rep.  80.642    EAP
+96                  Laos  67.484    EAP
+104          Macao_China  80.934    EAP
+108             Malaysia  74.221    EAP
+117 Micronesia_Fed._Sts.  68.978    EAP
+119             Mongolia  68.498    EAP
+123              Myanmar  65.193    EAP
+128        New_Caledonia  76.521    EAP
+129          New_Zealand  80.654    EAP
+137     Papua_New_Guinea  62.791    EAP
+140          Philippines  68.749    EAP
+151                Samoa  72.444    EAP
+157            Singapore  81.126    EAP
+160      Solomon_Islands  67.852    EAP
+174             Thailand  74.126    EAP
+175          Timor-Leste  62.475    EAP
+177                Tonga  72.317    EAP
+189              Vanuatu  71.017    EAP
+193              Vietnam  75.181    EAP
+
+$EuCA
+                   Country LifeExp Region
+2                  Albania  76.918   EuCA
+6                  Armenia  74.241   EuCA
+9                  Austria  80.854   EuCA
+10              Azerbaijan  70.739   EuCA
+15                 Belarus  70.349   EuCA
+16                 Belgium  80.009   EuCA
+21  Bosnia_and_Herzegovina  75.670   EuCA
+25                Bulgaria  73.371   EuCA
+34         Channel_Islands  80.055   EuCA
+43                 Croatia  76.640   EuCA
+45                  Cyprus  79.591   EuCA
+46              Czech_Rep.  77.685   EuCA
+47                 Denmark  78.826   EuCA
+55                 Estonia  74.825   EuCA
+58                 Finland  79.977   EuCA
+59                  France  81.539   EuCA
+64                 Georgia  73.737   EuCA
+65                 Germany  80.414   EuCA
+67                  Greece  79.915   EuCA
+78                 Hungary  74.414   EuCA
+79                 Iceland  81.804   EuCA
+84                 Ireland  80.557   EuCA
+86                   Italy  81.855   EuCA
+90              Kazakhstan  67.017   EuCA
+95              Kyrgyzstan  67.714   EuCA
+97                  Latvia  73.339   EuCA
+102              Lithuania  72.231   EuCA
+103             Luxembourg  79.963   EuCA
+105          Macedonia_FYR  74.847   EuCA
+111                  Malta  79.634   EuCA
+118                Moldova  69.317   EuCA
+120             Montenegro  74.573   EuCA
+126            Netherlands  80.734   EuCA
+133                 Norway  81.097   EuCA
+141                 Poland  76.126   EuCA
+142               Portugal  79.499   EuCA
+146                Romania  73.979   EuCA
+147                 Russia  68.823   EuCA
+155                 Serbia  74.522   EuCA
+158        Slovak_Republic  75.446   EuCA
+159               Slovenia  79.341   EuCA
+164                  Spain  81.404   EuCA
+169                 Sweden  81.439   EuCA
+170            Switzerland  82.338   EuCA
+172             Tajikistan  67.529   EuCA
+180                 Turkey  73.979   EuCA
+181           Turkmenistan  64.986   EuCA
+183                Ukraine  68.494   EuCA
+185         United_Kingdom  80.170   EuCA
+188             Uzbekistan  68.287   EuCA
+
+$MENA
+                 Country LifeExp Region
+3                Algeria  73.131   MENA
+12               Bahrain  75.057   MENA
+48              Djibouti  57.937   MENA
+51                 Egypt  73.235   MENA
+82                  Iran  72.974   MENA
+83                  Iraq  69.042   MENA
+85                Israel  81.618   MENA
+89                Jordan  73.403   MENA
+94                Kuwait  74.576   MENA
+98               Lebanon  72.640   MENA
+101                Libya  74.788   MENA
+121              Morocco  72.150   MENA
+134                 Oman  72.974   MENA
+144                Qatar  78.371   MENA
+153         Saudi_Arabia  73.911   MENA
+171                Syria  75.850   MENA
+179              Tunisia  74.515   MENA
+184 United_Arab_Emirates  76.546   MENA
+191   West_Bank_and_Gaza  72.832   MENA
+192       Western_Sahara  67.301   MENA
+195           Yemen_Rep.  65.493   MENA
+
+$SAs
+        Country LifeExp Region
+1   Afghanistan  48.673    SAs
+13   Bangladesh  68.944    SAs
+19       Bhutan  67.185    SAs
+80        India  65.438    SAs
+109    Maldives  76.848    SAs
+125       Nepal  68.795    SAs
+135    Pakistan  65.437    SAs
+165   Sri_Lanka  74.941    SAs
+
+$SSA
+                  Country LifeExp Region
+4                  Angola  51.093    SSA
+18                  Benin  56.081    SSA
+22               Botswana  53.183    SSA
+26           Burkina_Faso  55.439    SSA
+27                Burundi  50.411    SSA
+29               Cameroon  51.610    SSA
+31             Cape_Verde  74.156    SSA
+32   Central_African_Rep.  48.398    SSA
+33                   Chad  49.553    SSA
+38                Comoros  61.061    SSA
+39        Congo_Dem._Rep.  48.397    SSA
+40             Congo_Rep.  57.379    SSA
+42          Cote_d'Ivoire  55.377    SSA
+53      Equatorial_Guinea  51.088    SSA
+54                Eritrea  61.597    SSA
+56               Ethiopia  59.274    SSA
+62                  Gabon  62.703    SSA
+63                 Gambia  58.491    SSA
+66                  Ghana  64.228    SSA
+72                 Guinea  54.097    SSA
+73          Guinea-Bissau  48.132    SSA
+91                  Kenya  57.134    SSA
+99                Lesotho  48.196    SSA
+100               Liberia  56.786    SSA
+106            Madagascar  66.718    SSA
+107                Malawi  54.210    SSA
+110                  Mali  51.444    SSA
+113            Mauritania  58.582    SSA
+114             Mauritius  73.373    SSA
+115               Mayotte  77.433    SSA
+122            Mozambique  50.239    SSA
+124               Namibia  62.465    SSA
+131                 Niger  54.675    SSA
+132               Nigeria  51.879    SSA
+145               Reunion  77.653    SSA
+148                Rwanda  55.442    SSA
+152 Sao_Tome_and_Principe  64.666    SSA
+154               Senegal  59.318    SSA
+156          Sierra_Leone  47.794    SSA
+161               Somalia  51.219    SSA
+162          South_Africa  52.797    SSA
+163           South_Sudan  59.400    SSA
+166                 Sudan  61.452    SSA
+168             Swaziland  48.718    SSA
+173              Tanzania  58.199    SSA
+176                  Togo  57.062    SSA
+182                Uganda  54.116    SSA
+196                Zambia  49.025    SSA
+197              Zimbabwe  51.384    SSA
+
+> lifesplit$EAP
+                 Country LifeExp Region
+8              Australia  81.907    EAP
+24                Brunei  78.005    EAP
+28              Cambodia  63.125    EAP
+36                 China  73.456    EAP
+57                  Fiji  69.245    EAP
+61      French_Polynesia  75.133    EAP
+70                  Guam  76.142    EAP
+77       Hong_Kong_China  82.759    EAP
+81             Indonesia  69.366    EAP
+88                 Japan  83.394    EAP
+92       Korea_Dem._Rep.  68.846    EAP
+93            Korea_Rep.  80.642    EAP
+96                  Laos  67.484    EAP
+104          Macao_China  80.934    EAP
+108             Malaysia  74.221    EAP
+117 Micronesia_Fed._Sts.  68.978    EAP
+119             Mongolia  68.498    EAP
+123              Myanmar  65.193    EAP
+128        New_Caledonia  76.521    EAP
+129          New_Zealand  80.654    EAP
+137     Papua_New_Guinea  62.791    EAP
+140          Philippines  68.749    EAP
+151                Samoa  72.444    EAP
+157            Singapore  81.126    EAP
+160      Solomon_Islands  67.852    EAP
+174             Thailand  74.126    EAP
+175          Timor-Leste  62.475    EAP
+177                Tonga  72.317    EAP
+189              Vanuatu  71.017    EAP
+193              Vietnam  75.181    EAP
+> 
+> lifeEAP = lifedata[Region=='EAP',]
+> lifeSSA = lifedata[Region == 'SSA', ]
+> lifeEAP
+                 Country LifeExp Region
+8              Australia  81.907    EAP
+24                Brunei  78.005    EAP
+28              Cambodia  63.125    EAP
+36                 China  73.456    EAP
+57                  Fiji  69.245    EAP
+61      French_Polynesia  75.133    EAP
+70                  Guam  76.142    EAP
+77       Hong_Kong_China  82.759    EAP
+81             Indonesia  69.366    EAP
+88                 Japan  83.394    EAP
+92       Korea_Dem._Rep.  68.846    EAP
+93            Korea_Rep.  80.642    EAP
+96                  Laos  67.484    EAP
+104          Macao_China  80.934    EAP
+108             Malaysia  74.221    EAP
+117 Micronesia_Fed._Sts.  68.978    EAP
+119             Mongolia  68.498    EAP
+123              Myanmar  65.193    EAP
+128        New_Caledonia  76.521    EAP
+129          New_Zealand  80.654    EAP
+137     Papua_New_Guinea  62.791    EAP
+140          Philippines  68.749    EAP
+151                Samoa  72.444    EAP
+157            Singapore  81.126    EAP
+160      Solomon_Islands  67.852    EAP
+174             Thailand  74.126    EAP
+175          Timor-Leste  62.475    EAP
+177                Tonga  72.317    EAP
+189              Vanuatu  71.017    EAP
+193              Vietnam  75.181    EAP
+> lifeSSA
+                  Country LifeExp Region
+4                  Angola  51.093    SSA
+18                  Benin  56.081    SSA
+22               Botswana  53.183    SSA
+26           Burkina_Faso  55.439    SSA
+27                Burundi  50.411    SSA
+29               Cameroon  51.610    SSA
+31             Cape_Verde  74.156    SSA
+32   Central_African_Rep.  48.398    SSA
+33                   Chad  49.553    SSA
+38                Comoros  61.061    SSA
+39        Congo_Dem._Rep.  48.397    SSA
+40             Congo_Rep.  57.379    SSA
+42          Cote_d'Ivoire  55.377    SSA
+53      Equatorial_Guinea  51.088    SSA
+54                Eritrea  61.597    SSA
+56               Ethiopia  59.274    SSA
+62                  Gabon  62.703    SSA
+63                 Gambia  58.491    SSA
+66                  Ghana  64.228    SSA
+72                 Guinea  54.097    SSA
+73          Guinea-Bissau  48.132    SSA
+91                  Kenya  57.134    SSA
+99                Lesotho  48.196    SSA
+100               Liberia  56.786    SSA
+106            Madagascar  66.718    SSA
+107                Malawi  54.210    SSA
+110                  Mali  51.444    SSA
+113            Mauritania  58.582    SSA
+114             Mauritius  73.373    SSA
+115               Mayotte  77.433    SSA
+122            Mozambique  50.239    SSA
+124               Namibia  62.465    SSA
+131                 Niger  54.675    SSA
+132               Nigeria  51.879    SSA
+145               Reunion  77.653    SSA
+148                Rwanda  55.442    SSA
+152 Sao_Tome_and_Principe  64.666    SSA
+154               Senegal  59.318    SSA
+156          Sierra_Leone  47.794    SSA
+161               Somalia  51.219    SSA
+162          South_Africa  52.797    SSA
+163           South_Sudan  59.400    SSA
+166                 Sudan  61.452    SSA
+168             Swaziland  48.718    SSA
+173              Tanzania  58.199    SSA
+176                  Togo  57.062    SSA
+182                Uganda  54.116    SSA
+196                Zambia  49.025    SSA
+197              Zimbabwe  51.384    SSA
+> summary(lifeEAP[,2])
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  62.48   68.77   72.95   73.09   77.63   83.39 
+> summary(lifeSSA[,2])
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  47.79   51.22   55.44   56.80   59.40   77.65 
+> boxplot(lifeEAP[,2], lifeSSA[,2], range=0, border=rainbow(2), names=c('EAP', 'SSA'), main="Life Expectancies: Box Plot")
+> boxplot(LifeExp~Region, range=0, border=rainbow(6), main='Life Expectancies: Box Plot (all 6 regions)')
+> 

@@ -1,0 +1,72 @@
+# @szj
+## environment
+# p.. <- 'C:/users/szj/desktop'  # set desktop path
+
+## 4short
+# d.. <- function(x){  # clean workspace
+#   rm(list=ls(all=TRUE))
+# }
+# i.. <- function(x){ # import raw data by choose
+#   raw.x <- read.table(file.choose())
+# }
+# # Explore Data Analysis
+# EDA <- function(x){
+#   par(mfrow = c(2, 2))
+#   hist(x)
+#   dotchart(x)
+#   boxplot(x, horizontal = T)
+#   qqnorm(x); qqline(x)
+#   par(mfrow = c(1, 1))
+# }
+### stats
+# cv = function(n){ # co-variation
+#   sd(n)/mean(n)
+# }
+# se = function(y){ # standard error
+#   sd(y)/sqrt(length(y))
+# }
+# expect mean = sum(sort(x)*dbinom(x,size,prob)
+# # calc conf.int with knowing sigma
+# u.conf.int <- function(sample, sigma, conf.level = 0.95){
+#   n = length(sample)
+#   xbar = mean(sample)
+#   a = 1 - conf.level
+#   ua = qnorm(1 - a / 2)
+#   se = sigma / sqrt(n)
+#   ME = ua * se
+#   xbar + c(-ME, ME)
+# } 
+# # calc conf.int with small sample i.e. unkown sigma
+# # aka. t.test()
+# t.conf.int <- function(x,conf.level=0.95){     
+#   n = length(x)
+#   xbar = mean(x)
+#   a = 1 - conf.level   
+#   ta = qt(1 - a / 2, n - 1)
+#   s = sd(x)
+#   Se = s / sqrt(n)
+#   xbar + c(-ta * Se, ta * Se)
+# }
+
+
+## 4fun
+# Toss <- function(n = 1e5){
+# t <- sample(c("Yes, Just Do It!", "No, Be Yourself!"), n, rep = T)
+# tt <- as.data.frame(table(t))
+# winner <- tt[1,which(tt[]==max(tt$Freq))-2]
+# print(tt)
+# }
+# Dice <- function(time = 1, n = 2){
+#   dice=as.vector(outer(1:6, 1:6, paste))
+#   sample(dice, time, rep = T)
+# }
+ciba = function(x){
+  link <- url(paste('http://dict.youdao.com/m/search?keyfrom=dict.mindex&vendor=&q=',iconv(x,to='UTF-8')),encoding='UTF-8')
+  readLines(link)->a
+  gsub('(<[^<>]*>)|(^ )|(\t)','',a)->a;gsub(' {2,}',' ',a)->a
+  head(a,-11)->a;tail(a,-35)->a;a[a!='']->a
+  paste(a,collapse='\n')->a
+  gsub('(\n *){2,}','\n',a)->a;gsub(' *\n *','\n',a)->a
+  cat(a)
+  close(link)
+}

@@ -1,0 +1,61 @@
+
+R version 2.15.2 (2012-10-26) -- "Trick or Treat"
+Copyright (C) 2012 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: i386-apple-darwin9.8.0/i386 (32-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[R.app GUI 1.53 (6335) i386-apple-darwin9.8.0]
+
+> setwd("~/Desktop/Lec 1-5 shape")
+> data = read.table('LifeExpTable.txt')
+> lifeexp = data[,2]
+> hist(lifeexp)
+> hist(lifeexp, breaks=5)
+> hist(lifeexp, breaks=5, xlab = 'Life Expectancy (years)')
+> hist(lifeexp, breaks=5, xlab = 'Life Expectancy (years)', main = 'Histogram of Life Expectancies')
+> hist(lifeexp, breaks=10, xlab = 'Life Expectancy (years)', main = 'Histogram of Life Expectancies')
+> hist(lifeexp, breaks=20, xlab = 'Life Expectancy (years)', main = 'Histogram of Life Expectancies')
+> boxplot(lifeexp, horizontal=TRUE, range=0, xlab = 'Life Expectancy (years)')
+> summary(lifeexp)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  47.79   64.67   73.24   69.86   76.65   83.39 
+> skeleton = read.table('SkeletonData.txt', header=TRUE)
+> attach(skeleton)
+> hist(DGDifference, xlab="Estimated Age - Actual Age (years)", main="Histogram of Difference")
+> boxplot(DGDifference, horizontal=TRUE, xlab="Estimated Age - Actual Age (years)")
+> summary(DGDifference)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ -60.00  -23.00  -13.00  -14.15   -5.00   32.00 
+> nysalaries=c(33750,44000,138188,45566.67,44000,141666.67,292500,5600000,103500,190000,65000,33750,195000,44000.04,4600000,194375,33750,112495.5,95000,301999,181500,33750,185000,205000,44000)
+> 
+> hist(nysalaries/1000,breaks=24, xlab="Salaries in thousands of dollars (US)", main="Histogram of NY Red Bulls Salaries")
+> nysalaries_OutliersRmv = sort(nysalaries)[1:23]
+> hist(nysalaries_OutliersRmv/1000, breaks=3, xlab="Salaries in thousands of dollars (US), outliers removed", main="Histogram of NY Red Bulls Salaries")
+> boxplot(nysalaries_OutliersRmv/1000, horizontal=TRUE, xlab="NY Red Bulls salaries in thousands of dollars (US), outliers removed")
+> summary(nysalaries_OutliersRmv)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  33750   44000  103500  119900  187500  302000 
+> summary(nysalaries_OutliersRmv, digits=6)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  33750   44000  103500  119904  187500  301999 
+> summary(nysalaries_OutliersRmv, digits=7)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  33750   44000  103500  119904  187500  301999 
+> summary(nysalaries_OutliersRmv, digits=8)
+    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+ 33750.0  44000.0 103500.0 119903.9 187500.0 301999.0 
+> 

@@ -1,0 +1,54 @@
+
+R version 2.15.2 (2012-10-26) -- "Trick or Treat"
+Copyright (C) 2012 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: i386-apple-darwin9.8.0/i386 (32-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[R.app GUI 1.53 (6335) i386-apple-darwin9.8.0]
+
+> dbinom(0, size=3, prob=1/2)
+[1] 0.125
+> x = seq(0, 3, by=1)
+> prob_x = dbinom(x, size=3, prob=1/2)
+> cbind(x, prob_x)
+     x prob_x
+[1,] 0  0.125
+[2,] 1  0.375
+[3,] 2  0.375
+[4,] 3  0.125
+> plot(x, prob_x, type='h', col='red', main='Binomial(3,1/2)')
+> sum(x*prob_x)
+[1] 1.5
+> y = seq(0,50,by=1)
+> prob_y = dbinom(y,50,0.20)
+> plot(y, prob_y, type='h', col='red', main='Binomial(50, .2)')
+> x = seq(-1,2,	length=100)
+> unif01 = dunif(x, min=0, max=1)
+> plot(x, unif01, type='l', col='red', main='Uniform[0,1]')
+> x = seq(-3, 3, length=100)
+> normal01 = dnorm(x, mean=0, sd=1)
+> plot(x, normal01, type='l', col='red', main='Normal(0,1)')
+> rbinom(1, 10, prob=0.5)
+[1] 4
+> binom_sample = rbinom(1000, 10, prob=0.5)
+> table(binom_sample)
+binom_sample
+  0   1   2   3   4   5   6   7   8   9 
+  1   9  39 101 231 253 206 110  41   9 
+> freq = table(binom_sample)
+> barplot(freq, xlab = 'X=number of heads')
+> 

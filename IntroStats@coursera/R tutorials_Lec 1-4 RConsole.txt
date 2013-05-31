@@ -1,0 +1,84 @@
+
+R version 2.15.2 (2012-10-26) -- "Trick or Treat"
+Copyright (C) 2012 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: i386-apple-darwin9.8.0/i386 (32-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[R.app GUI 1.53 (6335) i386-apple-darwin9.8.0]
+
+> setwd('~/Desktop/Lec 1-4 spread')
+> data = read.table("LifeExpTable.txt")
+> lifeexp = data[,2]
+> boxplot(lifeexp, ylab='Life Expectancy', ylim=c(40,90))
+> summary(lifeexp)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  47.79   64.67   73.24   69.86   76.65   83.39 
+> range(lifeexp)
+[1] 47.794 83.394
+> max(lifeexp) - min(lifeexp)
+[1] 35.6
+> IQR(lifeexp)
+[1] 11.986
+> 
+> 
+> grades = c(79, 68, 69, 88, 90, 74, 87, 76, 93)
+> summary(grades)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  68.00   74.00   79.00   80.44   88.00   93.00 
+> var(grades)
+[1] 87.27778
+> sd(grades)
+[1] 9.342258
+> sqrt(var(grades))
+[1] 9.342258
+> round(sd(grades),1)
+[1] 9.3
+> 
+> 
+> nysalaries = c(33750, 44000, 138188, 45566.67, 44000, 141666.67,
++ 292500, 5600000, 103500, 190000, 65000, 33750, 195000, 44000.04,
++ 4600000, 194375, 33750, 112495.5, 95000, 301999, 181500, 33750,
++ 185000, 205000, 44000)
+> 
+> nysalariesTrim = sort(nysalaries)
+> nysalariesTrim = nysalariesTrim[3:23]
+> length(nysalariesTrim)
+[1] 21
+> median = median(nysalaries)
+> mean = mean(nysalaries)
+> range = max(nysalaries) - min(nysalaries)
+> iqr = IQR(nysalaries)
+> st.dev = sd(nysalaries)
+> orign = c(median, mean, range, iqr, st.dev)
+> 
+> medianTrim = median(nysalariesTrim)
+> meanTrim = mean(nysalariesTrim)
+> rangeTrim = max(nysalariesTrim) - min(nysalariesTrim)
+> iqrTrim = IQR(nysalariesTrim)
+> st.devTrim = sd(nysalariesTrim)
+> trim = c(medianTrim, meanTrim, rangeTrim, iqrTrim, st.devTrim)
+> stats = cbind(orign, trim)
+> rownames(stats) = c('median', 'mean', 'range', 'IQR', 'std.dev')
+> 
+> stats
+            orign      trim
+median   112495.5 112495.50
+mean     518311.6 128109.09
+range   5566250.0 268249.00
+IQR      150375.0 145999.96
+std.dev 1388822.1  83990.81
+> 

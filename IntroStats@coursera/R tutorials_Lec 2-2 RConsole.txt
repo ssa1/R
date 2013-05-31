@@ -1,0 +1,208 @@
+
+R version 2.15.2 (2012-10-26) -- "Trick or Treat"
+Copyright (C) 2012 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: i386-apple-darwin9.8.0/i386 (32-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[R.app GUI 1.53 (6335) i386-apple-darwin9.8.0]
+
+> setwd('~/Desktop/Lec 2-2 twocateg')
+> skeleton = read.table('SkeletonData.txt', header=TRUE)
+> attach(skeleton)
+> BMI = factor(BMI, levels = c('underweight', 'normal', 'overweight', 'obese'))
+> Sex = factor(Sex, levels=c('1', '2'), labels=c('Male', 'Female'))
+> freqBMI = table(BMI)
+> relfreqBMI = table(BMI)/400
+> cbind(freqBMI, relfreqBMI)
+            freqBMI relfreqBMI
+underweight      74     0.1850
+normal          225     0.5625
+overweight       81     0.2025
+obese            20     0.0500
+> 
+> freqSex = table(Sex)
+> relfreqSex = table(Sex)/400
+> cbind(freqSex, relfreqSex)
+       freqSex relfreqSex
+Male       281     0.7025
+Female     119     0.2975
+> 
+> library(gmodels)
+> joint = CrossTable(BMI, Sex, prop.chisq=FALSE)
+
+ 
+   Cell Contents
+|-------------------------|
+|                       N |
+|           N / Row Total |
+|           N / Col Total |
+|         N / Table Total |
+|-------------------------|
+
+ 
+Total Observations in Table:  400 
+
+ 
+             | Sex 
+         BMI |      Male |    Female | Row Total | 
+-------------|-----------|-----------|-----------|
+ underweight |        46 |        28 |        74 | 
+             |     0.622 |     0.378 |     0.185 | 
+             |     0.164 |     0.235 |           | 
+             |     0.115 |     0.070 |           | 
+-------------|-----------|-----------|-----------|
+      normal |       166 |        59 |       225 | 
+             |     0.738 |     0.262 |     0.562 | 
+             |     0.591 |     0.496 |           | 
+             |     0.415 |     0.147 |           | 
+-------------|-----------|-----------|-----------|
+  overweight |        59 |        22 |        81 | 
+             |     0.728 |     0.272 |     0.203 | 
+             |     0.210 |     0.185 |           | 
+             |     0.147 |     0.055 |           | 
+-------------|-----------|-----------|-----------|
+       obese |        10 |        10 |        20 | 
+             |     0.500 |     0.500 |     0.050 | 
+             |     0.036 |     0.084 |           | 
+             |     0.025 |     0.025 |           | 
+-------------|-----------|-----------|-----------|
+Column Total |       281 |       119 |       400 | 
+             |     0.703 |     0.297 |           | 
+-------------|-----------|-----------|-----------|
+
+ 
+> joint
+$t
+             y
+x             Male Female
+  underweight   46     28
+  normal       166     59
+  overweight    59     22
+  obese         10     10
+
+$prop.row
+             y
+x                  Male    Female
+  underweight 0.6216216 0.3783784
+  normal      0.7377778 0.2622222
+  overweight  0.7283951 0.2716049
+  obese       0.5000000 0.5000000
+
+$prop.col
+             y
+x                   Male     Female
+  underweight 0.16370107 0.23529412
+  normal      0.59074733 0.49579832
+  overweight  0.20996441 0.18487395
+  obese       0.03558719 0.08403361
+
+$prop.tbl
+             y
+x               Male Female
+  underweight 0.1150 0.0700
+  normal      0.4150 0.1475
+  overweight  0.1475 0.0550
+  obese       0.0250 0.0250
+
+> joint_counts = joint$t
+> barplot(joint_counts, beside=TRUE, col=rainbow(4), ylab='Frequency', xlab='Sex')
+> legend("topright",c("underweight","normal","overweight","obese"),pch=15,col=rainbow(4))
+> barplot(joint_counts, beside=FALSE, col=rainbow(4), ylab='Frequency', xlab='Sex')
+> legend("topright",c("underweight","normal","overweight","obese"),pch=15,col=rainbow(4))
+> 
+> BMI_given_Sex = joint$prop.col
+> barplot(BMI_given_Sex, col=rainbow(4), ylab='Proportion of each BMI classification for each Sex', xlab='Sex')
+> legend("topright", inset=c(.05,.01), c("underweight","normal","overweight","obese"), pch=15, col=rainbow(4), bty="o", bg="white") 
+> 
+> Patricia = matrix(c(23, 6140, 345, 5673), byrow=TRUE, ncol=2)
+> colnames(Patricia) = c('Yes', 'No')
+> rownames(Patricia) = c('HPV vaccine', 'Other')
+> 
+> Patricia_joint=CrossTable(Patricia, prop.chisq=FALSE)
+
+ 
+   Cell Contents
+|-------------------------|
+|                       N |
+|           N / Row Total |
+|           N / Col Total |
+|         N / Table Total |
+|-------------------------|
+
+ 
+Total Observations in Table:  12181 
+
+ 
+             |  
+             |       Yes |        No | Row Total | 
+-------------|-----------|-----------|-----------|
+ HPV vaccine |        23 |      6140 |      6163 | 
+             |     0.004 |     0.996 |     0.506 | 
+             |     0.062 |     0.520 |           | 
+             |     0.002 |     0.504 |           | 
+-------------|-----------|-----------|-----------|
+       Other |       345 |      5673 |      6018 | 
+             |     0.057 |     0.943 |     0.494 | 
+             |     0.938 |     0.480 |           | 
+             |     0.028 |     0.466 |           | 
+-------------|-----------|-----------|-----------|
+Column Total |       368 |     11813 |     12181 | 
+             |     0.030 |     0.970 |           | 
+-------------|-----------|-----------|-----------|
+
+ 
+> Patricia_joint
+$t
+            Yes   No
+HPV vaccine  23 6140
+Other       345 5673
+
+$prop.row
+                    Yes        No
+HPV vaccine 0.003731949 0.9962681
+Other       0.057328016 0.9426720
+
+$prop.col
+               Yes        No
+HPV vaccine 0.0625 0.5197664
+Other       0.9375 0.4802336
+
+$prop.tbl
+                    Yes        No
+HPV vaccine 0.001888187 0.5040637
+Other       0.028322798 0.4657253
+
+> 
+> library(SMPracticals)
+Loading required package: ellipse
+> smoking  
+     age smoker alive dead
+1  18-24      1    53    2
+2  18-24      0    61    1
+3  25-34      1   121    3
+4  25-34      0   152    5
+5  35-44      1    95   14
+6  35-44      0   114    7
+7  45-54      1   103   27
+8  45-54      0    66   12
+9  55-64      1    64   51
+10 55-64      0    81   40
+11 65-74      1     7   29
+12 65-74      0    28  101
+13   75+      1     0   13
+14   75+      0     0   64
+> 

@@ -1,0 +1,83 @@
+
+R version 2.15.2 (2012-10-26) -- "Trick or Treat"
+Copyright (C) 2012 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: x86_64-apple-darwin9.8.0/x86_64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[R.app GUI 1.53 (6335) x86_64-apple-darwin9.8.0]
+
+> #Set working directory
+> setwd('~/Desktop/Lec 8')
+> #Install the package pwr and load it
+> install.packages('pwr')
+trying URL 'http://probability.ca/cran/bin/macosx/leopard/contrib/2.15/pwr_1.1.1.tgz'
+Content type 'application/x-gzip' length 54670 bytes (53 Kb)
+opened URL
+==================================================
+downloaded 53 Kb
+
+
+The downloaded binary packages are in
+	/var/folders/yq/41g_z_kx1v762p7tvthyxcv00000gn/T//RtmpTJx6k9/downloaded_packages
+> library(pwr)
+> #Calculating sample size
+> #d = effect size = diff/estimate std of diff
+> pwr.t.test(power=0.8, d=0.004/0.0066, type="two.sample", alternative='two.sided', sig.level=0.05)
+
+     Two-sample t test power calculation 
+
+              n = 43.71847
+              d = 0.6060606
+      sig.level = 0.05
+          power = 0.8
+    alternative = two.sided
+
+ NOTE: n is number in *each* group 
+
+> #Read in the data
+> ccd = read.table('CCDdata.txt', header=T)
+> 
+> #Attach variable/column names
+> attach(ccd)
+> #Problem 1: males were coded m instead of M
+> sex
+  [1] F M M F M M F F M F M M F F M M M M F F M M M F M F M M F M F F M F M M F M M M F F M
+ [44] M F F M F F m F M M F F M M M F M F F M F F F F M F F F M M M M F M M F M M M M m M M
+ [87] M F M F M M F M F M F F M M M M M
+Levels: F m M
+> sex[sex=='m'] = 'M'
+> #Check your work
+> table(sex)
+sex
+ F  m  M 
+43  0 60 
+> sex = droplevels(sex)
+> #Problem 2: Missing observations coded with 999
+> age[age==999] = NA
+> BMI[BMI==999] = NA
+> HbA1c[HbA1c==999] = NA
+> HbA1cbaseline[HbA1cbaseline==999] = NA
+> CRP[CRP==999] = NA
+> CRPbaseline[CRPbaseline==999] = NA
+> #Variable of interest: Change in HbA1c, Change in CRP
+> HbA1cdiff = HbA1c-HbA1cbaseline
+> CRPdiff = CRP-CRPbaseline
+> #Log transformation
+> logCRP = log10(CRP)
+> logCRPbaseline = log10(CRPbaseline)
+> logCRPdiff = logCRP-logCRPbaseline 
+> 

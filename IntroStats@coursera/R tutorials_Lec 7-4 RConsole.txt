@@ -1,0 +1,64 @@
+
+R version 2.15.2 (2012-10-26) -- "Trick or Treat"
+Copyright (C) 2012 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: x86_64-apple-darwin9.8.0/x86_64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[R.app GUI 1.53 (6335) x86_64-apple-darwin9.8.0]
+
+> #Set working directory
+> setwd('~/Desktop/Lec 7-4 RegTrans')
+> #Read in data
+> Countries = read.table("LifeGDPhiv.txt")
+> #Rename columns
+> colnames(Countries) = c('Country', 'LifeExp', 'GDP', 'HIV')
+> #Attach variable/column names
+> attach(Countries)
+> #View the first few observations
+> head(Countries)
+    Country LifeExp       GDP HIV
+1   Algeria  73.131  6406.817 0.1
+2    Angola  51.093  5519.183 2.0
+3 Argentina  75.901 15741.046 0.5
+4   Armenia  74.241  4748.929 0.1
+5 Australia  81.907 34642.388 0.1
+6   Austria  80.854 36871.071 0.3
+> #Regression
+> linreg = lm(LifeExp ~ GDP)
+> #Scatterplot with line of best fit
+> plot(GDP, LifeExp, xlab='GDP per capita (2000 U.S. $)', ylab='Life Expectancy (years)')
+> abline(linreg, col='orange')
+> #Regression residuals
+> resids = linreg$resid
+> #Graph residuals
+> plot(GDP, resids, xlab="GDP per capita (2000 U.S. $)", ylab="Residuals (years)")
+> #Vertical line at zero for reference
+> abline(h=0, col="red")
+> #Transforming GDP to log(GDP) (base 10)
+> logGDP = log10(GDP)
+> #Regression with logGDP
+> linreg_log = lm(LifeExp ~ logGDP)
+> #Scatterplot with line of best fit
+> plot(logGDP, LifeExp, col="purple", xlab="Logarithm of GDP per capita (2000 U.S. $)", ylab="Life Expectancy (years)")
+> abline(linreg_log, col='orange')
+> #Regression residuals
+> resids_log = linreg_log$resid
+> #Graph residuals
+> plot(logGDP, resids_log, xlab="Logarithm of GDP per capita (2000 U.S. $)", ylab="Residuals (years)")
+> #Vertical line at zero for reference
+> abline(h=0, col="red")
+> 

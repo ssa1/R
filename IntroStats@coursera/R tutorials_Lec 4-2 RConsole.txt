@@ -1,0 +1,46 @@
+
+R version 2.15.2 (2012-10-26) -- "Trick or Treat"
+Copyright (C) 2012 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: x86_64-apple-darwin9.8.0/x86_64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[R.app GUI 1.53 (6335) x86_64-apple-darwin9.8.0]
+
+> phat = 0.576
+> z = qnorm(0.025, mean=0, sd=1, lower.tail=FALSE)
+> ME = z * sqrt(phat*(1-phat)/1000)
+> phat + c(-ME, +ME)
+[1] 0.5453703 0.6066297
+trying URL 'http://probability.ca/cran/bin/macosx/leopard/contrib/2.15/binom_1.0-5.tgz'
+Content type 'application/x-gzip' length 336708 bytes (328 Kb)
+opened URL
+==================================================
+downloaded 328 Kb
+
+
+The downloaded binary packages are in
+	/var/folders/yq/41g_z_kx1v762p7tvthyxcv00000gn/T//Rtmpk3VmjW/downloaded_packages
+> library(binom)
+Loading required package: lattice
+> binom.confint(576, 1000, conf.level=0.95, methods='asymptotic')
+      method   x    n  mean     lower     upper
+1 asymptotic 576 1000 0.576 0.5453703 0.6066297
+> 
+> ME = z* sqrt(1/2*1/2 / 1000)
+> phat + c(-ME, +ME)
+[1] 0.5450102 0.6069898
+> 
