@@ -3,9 +3,7 @@
 # p.. <- 'C:/users/szj/desktop'  # set desktop path
 
 ## 4short
-# d.. <- function(x){  # clean workspace
-#   rm(list=ls(all=TRUE))
-# }
+#  rmm <- function(x) rm(list=ls(all=TRUE)) # clean workspace
 # i.. <- function(x){ # import raw data by choose
 #   raw.x <- read.table(file.choose())
 # }
